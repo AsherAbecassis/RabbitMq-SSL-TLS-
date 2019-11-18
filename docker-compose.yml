@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  rabbit:
+    image: rabbitmq:3.7.11-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=test
+      - RABBITMQ_DEFAULT_PASS=test
+      - RABBITMQ_SSL_CACERTFILE=/etc/ssl/rabbit/cacert.pem
+      - RABBITMQ_SSL_CERTFILE=/etc/ssl/rabbit/cert.pem
+      # - RABBITMQ_SSL_DEPTH
+      - RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT=false
+      - RABBITMQ_SSL_KEYFILE=/etc/ssl/rabbit/key.pem
+      - RABBITMQ_SSL_VERIFY=verify_peer
+    ports:
+    - "5672:5672"
+    - "5671:5671"
+    volumes:
+      - .:/code
+      - ./certificates/ca_certificate.pem:/etc/ssl/rabbit/cacert.pem
+      - ./certificates/server_certificate.pem:/etc/ssl/rabbit/cert.pem
+      - ./certificates/server_key.pem:/etc/ssl/rabbit/key.pem
+    #- ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
