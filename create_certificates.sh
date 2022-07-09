@@ -1,9 +1,9 @@
 #!/bin/bash
-mkdir certificates
-git clone https://github.com/michaelklishin/tls-gen tls-gen
+mkdir certificates3
+
 cd tls-gen/basic
 make PASSWORD=random_pw
 make verify
 make info
-cp result/* -R ../../certificates/
-ls -l ../../certificates
+cp result/* -R ../../certificates3/
+ls -l ../../certificates3

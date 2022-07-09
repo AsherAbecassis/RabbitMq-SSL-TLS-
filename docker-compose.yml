@@ -12,12 +12,14 @@ services:
       - RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT=false
       - RABBITMQ_SSL_KEYFILE=/etc/ssl/rabbit/key.pem
       - RABBITMQ_SSL_VERIFY=verify_peer
+      - ssl_options.password=random_pw
     ports:
     - "5672:5672"
     - "5671:5671"
+    - "15671:15671"
     volumes:
       - .:/code
-      - ./certificates/ca_certificate.pem:/etc/ssl/rabbit/cacert.pem
-      - ./certificates/server_certificate.pem:/etc/ssl/rabbit/cert.pem
-      - ./certificates/server_key.pem:/etc/ssl/rabbit/key.pem
+      - ./certificates3/ca.pem:/etc/ssl/rabbit/cacert.pem
+      - ./certificates3/server-cert.pem:/etc/ssl/rabbit/cert.pem
+      - ./certificates3/server-key.pem:/etc/ssl/rabbit/key.pem
     #- ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
